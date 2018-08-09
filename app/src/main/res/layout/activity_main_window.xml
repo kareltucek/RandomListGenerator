@@ -75,6 +75,7 @@
                 android:ems="10"
                 android:hint="Min"
                 android:inputType="numberSigned"
+                android:singleLine="true"
                 android:text="1" />
 
             <EditText
@@ -85,6 +86,7 @@
                 android:ems="10"
                 android:hint="Max"
                 android:inputType="numberSigned"
+                android:singleLine="true"
                 android:text="100" />
 
             <EditText
@@ -93,7 +95,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:hint="Quantity"
                 android:inputType="numberSigned"
+                android:singleLine="true"
                 android:text="1" />
 
             <EditText
@@ -102,7 +106,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:hint="Label"
+                android:imeOptions="actionDone"
+                android:inputType="textPersonName"
+                android:singleLine="true" />
         </LinearLayout>
 
         <LinearLayout
