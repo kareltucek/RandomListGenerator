@@ -18,6 +18,7 @@ public class GeneratorComponent extends ConstraintLayout {
     {
         this.findViewById(R.id.generateButton).setTag(this);
         this.findViewById(R.id.deleteButton).setTag(this);
+        this.findViewById(R.id.downButton).setTag(this);
         Refresh();
     }
 

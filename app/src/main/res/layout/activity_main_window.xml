@@ -49,6 +49,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Quantity" />
+
+            <TextView
+                android:id="@+id/labQ2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Label" />
         </LinearLayout>
 
         <LinearLayout
@@ -88,6 +95,14 @@
                 android:ems="10"
                 android:inputType="numberSigned"
                 android:text="1" />
+
+            <EditText
+                android:id="@+id/textViewLab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName" />
         </LinearLayout>
 
         <LinearLayout

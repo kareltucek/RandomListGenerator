@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -31,8 +32,14 @@ public class MainWindow extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         Save();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop(){
+        Save();
+        super.onStop();
     }
 
     private void setupListeners(){
@@ -63,13 +70,19 @@ public class MainWindow extends AppCompatActivity {
         return tv.isChecked();
     }
 
+    public String stringFromTV(View view, int id) {
+        TextView tv = view.getRootView().findViewById(id);
+        return tv.getText().toString();
+    }
+
     public Generator generatorFromValues(View view) {
         return new Generator(
                 intFromTV(view, R.id.textViewMin),
                 intFromTV(view, R.id.textViewMax),
                 intFromTV(view, R.id.textViewQ),
                 boolFromTV(view, R.id.checkBoxSort),
-                boolFromTV(view, R.id.checkBoxUnique)
+                boolFromTV(view, R.id.checkBoxUnique),
+                stringFromTV(view, R.id.textViewLab)
                 );
     }
 
@@ -111,6 +124,16 @@ public class MainWindow extends AppCompatActivity {
         ll.removeView(v);
     }
 
+    public void MoveDown(View view)
+    {
+        LinearLayout ll = (LinearLayout) findViewById(R.id.generatorLayoutBox);
+        View v = (GeneratorComponent)(view.getTag());
+        int idx = ll.indexOfChild(v);
+        idx = idx + 1 == ll.getChildCount() ? idx : idx + 1;
+        ll.removeView(v);
+        ll.addView(v, idx);
+    }
+
     public void Save()
     {
         String filename = "cfg";
@@ -132,6 +155,7 @@ public class MainWindow extends AppCompatActivity {
             outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
             outputStream.write(fileContents.getBytes());
             outputStream.close();
+            Log.i("rnd", "Successfully saved!");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -154,6 +178,7 @@ public class MainWindow extends AppCompatActivity {
                 ll.addView(v);
             }
             br.close();
+            Log.i("rnd", "Successfully loaded!");
         }
         catch (IOException e) {
         }

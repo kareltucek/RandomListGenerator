@@ -7,12 +7,12 @@
 
     <Button
         android:id="@+id/generateButton"
-        android:layout_width="wrap_content"
+        android:layout_width="56dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:onClick="Generate"
-        android:text="Generate"
+        android:text="Gen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,9 +26,20 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
-        android:textAppearance="@android:style/TextAppearance.Large"
-        app:layout_constraintEnd_toStartOf="@+id/deleteButton"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        app:layout_constraintEnd_toStartOf="@+id/downButton"
         app:layout_constraintStart_toEndOf="@+id/generateButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/downButton"
+        android:layout_width="43dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:onClick="MoveDown"
+        android:text="v"
+        app:layout_constraintEnd_toStartOf="@+id/deleteButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
