@@ -148,9 +148,6 @@ public class MainWindow extends AppCompatActivity {
 
     public void Save()
     {
-        if(true) {
-            return;
-        }
         String filename = "cfg";
         String fileContents = "";
 
