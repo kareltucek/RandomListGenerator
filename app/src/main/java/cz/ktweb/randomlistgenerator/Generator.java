@@ -197,7 +197,7 @@ public class Generator {
         try {
             String[] slices = str.split(" ");
             slices = resolveNumericGenerator(slices);
-            String expr = slices[1];
+            String expr = deserializeString(slices[1]);
             int q = Integer.parseInt(slices[2]);
             int sort = Integer.parseInt(slices[3]);
             int unique = Integer.parseInt(slices[4]);
@@ -213,7 +213,7 @@ public class Generator {
 
     public String toString()
     {
-        String serial = "E " + serializeString(this.expr) + " " + q + " " + (sort ? 1 : 0 ) + " " + (unique ? 1 : 0) + " " + serializeString(this.label) + serializeString(this.value);
+        String serial = "E " + serializeString(this.expr) + " " + q + " " + (sort ? 1 : 0 ) + " " + (unique ? 1 : 0) + " " + serializeString(this.label) + " " + serializeString(this.value);
         return serial;
     }
 
