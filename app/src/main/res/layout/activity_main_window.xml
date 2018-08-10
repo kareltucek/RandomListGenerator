@@ -29,87 +29,105 @@
             android:orientation="horizontal"
             android:visibility="visible">
 
-            <TextView
-                android:id="@+id/labMin"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Min" />
+                android:layout_weight="2"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/labMax"
-                android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/labQ2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Label" />
+
+                <EditText
+                    android:id="@+id/textViewLab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Label"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:text="2 dice" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Max" />
+                android:layout_weight="4"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/labQ"
-                android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/labExpr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Range" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/textViewExpr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="Expression"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPersonName"
+                        android:singleLine="true"
+                        android:text="1-6" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_weight="1"
+                        android:onClick="showHelp"
+                        android:visibility="gone"
+                        app:srcCompat="@android:drawable/ic_menu_help" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Quantity" />
+                android:layout_weight="2"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/labQ2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Label" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/labQ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Quantity" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:focusableInTouchMode="true"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="151dp"
-            tools:layout_editor_absoluteY="8dp">
+                <EditText
+                    android:id="@+id/textViewQ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Quantity"
+                    android:inputType="numberSigned"
+                    android:singleLine="true"
+                    android:text="2" />
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/textViewMin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Min"
-                android:inputType="numberSigned"
-                android:singleLine="true"
-                android:text="1" />
-
-            <EditText
-                android:id="@+id/textViewMax"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Max"
-                android:inputType="numberSigned"
-                android:singleLine="true"
-                android:text="100" />
-
-            <EditText
-                android:id="@+id/textViewQ"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Quantity"
-                android:inputType="numberSigned"
-                android:singleLine="true"
-                android:text="1" />
-
-            <EditText
-                android:id="@+id/textViewLab"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Label"
-                android:imeOptions="actionDone"
-                android:inputType="textPersonName"
-                android:singleLine="true" />
         </LinearLayout>
 
         <LinearLayout
@@ -120,18 +138,27 @@
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/checkBoxSort"
-                android:layout_width="match_parent"
+                android:id="@+id/checkBoxUnique"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Sort" />
+                android:layout_weight="2"
+                android:text="Unique" />
 
             <CheckBox
-                android:id="@+id/checkBoxUnique"
-                android:layout_width="match_parent"
+                android:id="@+id/checkBoxSort"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="unique" />
+                android:layout_weight="4"
+                android:text="Sorted" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:onClick="showHelp"
+                android:text="Help " />
+
         </LinearLayout>
 
         <Button

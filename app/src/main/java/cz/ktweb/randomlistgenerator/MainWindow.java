@@ -1,8 +1,11 @@
 package cz.ktweb.randomlistgenerator;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -54,8 +57,8 @@ public class MainWindow extends AppCompatActivity {
                 return false;
             }
         };
-        findViewById(R.id.textViewMin).setOnKeyListener(listener);
-        findViewById(R.id.textViewMax).setOnKeyListener(listener);
+        findViewById(R.id.textViewLab).setOnKeyListener(listener);
+        findViewById(R.id.textViewExpr).setOnKeyListener(listener);
         findViewById(R.id.textViewQ).setOnKeyListener(listener);
     }
 
@@ -77,8 +80,7 @@ public class MainWindow extends AppCompatActivity {
 
     public Generator generatorFromValues(View view) {
         return new Generator(
-                intFromTV(view, R.id.textViewMin),
-                intFromTV(view, R.id.textViewMax),
+                stringFromTV(view, R.id.textViewExpr),
                 intFromTV(view, R.id.textViewQ),
                 boolFromTV(view, R.id.checkBoxSort),
                 boolFromTV(view, R.id.checkBoxUnique),
@@ -91,6 +93,16 @@ public class MainWindow extends AppCompatActivity {
 
         View v = new GeneratorComponent(view.getContext(), null, generatorFromValues(view));
         ll.addView(v);
+    }
+
+    public void showHelp(View view)
+    {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.help);
+        TextView txt = (TextView)dialog.findViewById(R.id.textbox);
+        Spanned sp = Html.fromHtml( getString(R.string.help_intro));
+        txt.setText(sp);
+        dialog.show();
     }
 
 
@@ -136,6 +148,9 @@ public class MainWindow extends AppCompatActivity {
 
     public void Save()
     {
+        if(true) {
+            return;
+        }
         String filename = "cfg";
         String fileContents = "";
 
