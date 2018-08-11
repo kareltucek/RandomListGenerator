@@ -21,7 +21,7 @@ public class Utils {
         boolean inQuote = false;
 
         char[] strArray = str.toCharArray();
-        String buffer = ""
+        String buffer = "";
         for(int i = 0; i < strArray.length; i++)
         {
             if(strArray[i] == '"')
