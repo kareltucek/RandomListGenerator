@@ -33,6 +33,7 @@ Continuing to the following sections is on your own risk!
   <li> <i>ranges</i> E.g., \"<b>1-5</b>\". Ranges are generally of form \"numeric expression - numeric expression\". Ranges are treated as if expanded into the parent list.</li>
   <li> <i>parenthesis groups</i> E.g., \"<b>(1,2,3)</b>\". parenthesis group picks one element with uniform probability and hands it over to the parent. </li>
   <li> <i>concatenation</i> E.g., \"<b>((a,b,c)|(1,2,3))</b>\" same as \"<b>(a,b,c|1,2,3)</b>\". Concatenates results of right and left side as a string. Result may be \"a|2\". This has <i>lower</i> priority than coma! </li>
+  <li> <i>string concatenation</i> E.g., \"<b>(cat,dog " eats " mouse, fish)</b>\" Any quote-enclosed string can be used in place of the "<b>|</b>" operator. </li>
   <li> <i>weight operator</i> E.g., \"1,2,3[2]\" Explicitly sets weight of the element. In this case, 3's probability will be 50%. Implicit weight is 1. </li>
 </ul>
 
@@ -51,8 +52,9 @@ Continuing to the following sections is on your own risk!
   <li> \"<b>(1,3)-(6-9)</b>\" Possible, but not recommended.</li>
   <li> \"<b>1,(2,3)</b>\" Returns 1 with 50% chance.</li>
   <li> \"<b>1,2-3</b>\" Returns 1 with 33% chance.</li>
-  <li> \"<b>1.0-2.0</b>\" Returns decimal number.</li>
+  <li> \"<b>(1.0-2.0)[3]</b>\" Returns decimal number with weight set to 3.</li>
   <li> \"<b>1,2.0-3.0</b>\" Returns 1 with 50% or decimal number between 2 and 3.</li>
+  <li> \"<b>(cat,dog[0] " eats " mouse, fish[3])</b>\" Returns "cat eats fish" with 75% or "cat eats mouse" with 25%.</li>
   <li> \"<b>(1-3),(4-20),(21-25)</b>" First picks one group (with uniform probability) and then picks number from that group (with probability uniform within that group).</li>
 ]]>
 

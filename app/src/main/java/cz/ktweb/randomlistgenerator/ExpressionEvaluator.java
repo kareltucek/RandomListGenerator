@@ -42,7 +42,7 @@ public class ExpressionEvaluator {
         rand = new Random();
     }
 
-    private static String[] tokenize(String str)
+    public static String[] tokenize(String str)
     {
         return str
                 .replaceAll("([()|])", " $1 ")
@@ -195,6 +195,13 @@ public class ExpressionEvaluator {
             {
                 results.add(pick(buffer));
                 results.add(new Result(Type.String, "|", 1));
+                buffer = new Vector<>();
+                idx++;
+            }
+            else if(tokens[idx].startsWith("\""))
+            {
+                results.add(pick(buffer));
+                results.add(new Result(Type.String, Utils.deserializeString(tokens[idx]), 1));
                 buffer = new Vector<>();
                 idx++;
             }
