@@ -15,4 +15,32 @@ public class Utils {
                 .replaceAll("^\"", "")
                 .replaceAll("\"$", "");
     }
+
+    public static String normalizeExpression(String str)
+    {
+        boolean inQuote = false;
+
+        char[] strArray = str.toCharArray();
+        String buffer = ""
+        for(int i = 0; i < strArray.length; i++)
+        {
+            if(strArray[i] == '"')
+            {
+                inQuote = !inQuote;
+            }
+            if(strArray[i] == ' ' && inQuote)
+            {
+                buffer += '_';
+            }
+            else if(strArray[i] == '_' && inQuote)
+            {
+                buffer += "__";
+            }
+            else
+            {
+                buffer += strArray[i];
+            }
+        }
+        return buffer;
+    }
 }

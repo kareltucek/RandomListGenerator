@@ -80,7 +80,7 @@ public class MainWindow extends AppCompatActivity {
 
     public Generator generatorFromValues(View view) {
         return new Generator(
-                stringFromTV(view, R.id.textViewExpr),
+                Utils.normalizeExpression(stringFromTV(view, R.id.textViewExpr)),
                 intFromTV(view, R.id.textViewQ),
                 boolFromTV(view, R.id.checkBoxSort),
                 boolFromTV(view, R.id.checkBoxUnique),
