@@ -124,32 +124,6 @@ public class Generator {
         }
         value = viewNumString(this.label, results, 0, results.length);
     }
-    /*
-    {
-        Random rand = new Random();
-
-        values = new int[q];
-        for ( int i = 0; i < q; i++)
-        {
-            boolean is_unique = false;
-            while(!is_unique)
-            {
-                values[i] = rand.nextInt((max - min) + 1) + min;
-                is_unique = true;
-                if ( this.unique && i < (max - min) + 1 )
-                {
-                    for (int j = 0; j < i; j++)
-                    {
-                        is_unique &= values[i] != values[j];
-                    }
-                }
-            }
-        }
-        if(sort)
-        {
-            Arrays.sort(values);
-        }
-    }*/
 
     public static String[] resolveNumericGenerator(String[] slices)
     {
@@ -186,10 +160,11 @@ public class Generator {
     public static String deserializeString(String str)
     {
         return str
-                .replace("__", "\n")
-                .replace("_", " ")
-                .replace("\n", "_")
-                .replace("\"".toString(), "");
+                .replaceAll("__", "\n")
+                .replaceAll("_", " ")
+                .replaceAll("\n", "_")
+                .replaceAll("^\"", "")
+                .replaceAll("\"$", "");
     }
 
     public static Generator fromString(String str)

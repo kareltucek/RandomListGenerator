@@ -22,9 +22,9 @@ public class ExpressionEvaluator {
     public class Result {
         Type type;
         String value;
-        int weight;
+        double weight;
 
-        public Result(Type t, String v, int w){
+        public Result(Type t, String v, double w){
             type = t;
             value = v;
             weight = w;
@@ -46,7 +46,9 @@ public class ExpressionEvaluator {
     {
         return str
                 .replaceAll("([()|])", " $1 ")
-                .replaceAll("-", " - ")
+                .replaceAll("\\[ *", " [")
+                .replaceAll(" *\\]", "] ")
+                .replaceAll("- *([0-9])", " -$1")
                 .replaceAll("([0-9]) *- *([-0-9])", "$1 - $2")
                 .replaceAll(",", " ")
                 .replaceAll("  *", " ")
@@ -169,6 +171,7 @@ public class ExpressionEvaluator {
 
     private Result squash(List<Result> list)
     {
+        boolean error = false;
         if(list.size() == 1)
         {
             return list.get(0);
@@ -177,8 +180,9 @@ public class ExpressionEvaluator {
         for(int i = 0; i < list.size(); i++)
         {
             s = s + list.get(i).value;
+            error |= list.get(i).type == Type.Error;
         }
-        return new Result(Type.String, s, 1);
+        return new Result(error ? Type.Error : Type.String, s, 1);
     }
 
     private Result evaluateGroup()
@@ -197,6 +201,19 @@ public class ExpressionEvaluator {
             else if(tokens[idx].equals(")"))
             {
                 break;
+            }
+            else if(tokens[idx].startsWith("["))
+            {
+                try {
+                    String num = tokens[idx].replaceAll("[\\[\\]]", "");
+                    double weight = Double.parseDouble(num);
+                    buffer.get(buffer.size()-1).weight = weight;
+                }
+                catch (Exception e)
+                {
+                    buffer.add(new Result(Type.Error, "Error: failed to process [] expression.", 1));
+                }
+                idx++;
             }
             else
             {

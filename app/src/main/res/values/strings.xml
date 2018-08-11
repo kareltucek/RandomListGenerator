@@ -33,6 +33,7 @@ Continuing to the following sections is on your own risk!
   <li> <i>ranges</i> E.g., \"<b>1-5</b>\". Ranges are generally of form \"numeric expression - numeric expression\". Ranges are treated as if expanded into the parent list.</li>
   <li> <i>parenthesis groups</i> E.g., \"<b>(1,2,3)</b>\". parenthesis group picks one element with uniform probability and hands it over to the parent. </li>
   <li> <i>concatenation</i> E.g., \"<b>((a,b,c)|(1,2,3))</b>\" same as \"<b>(a,b,c|1,2,3)</b>\". Concatenates results of right and left side as a string. Result may be \"a|2\". This has <i>lower</i> priority than coma! </li>
+  <li> <i>weight operator</i> E.g., \"1,2,3[2]\" Explicitly sets weight of the element. In this case, 3's probability will be 50%. Implicit weight is 1. </li>
 </ul>
 
         <h2>Advanced use (distribution rules):</h2>
