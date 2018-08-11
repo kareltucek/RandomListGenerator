@@ -6,7 +6,7 @@
         on next startup, included last generated numbers.
 
   <ul>
-  <li> <i>Label</i> is an optional string which will identify newly created generators.</li>
+  <li> <i>Label</i> is an optional string which identifies created generators.</li>
   <li> <i>Range</i> is a possibly complex expression defining the range and distribution of a single generation instance. See following section for more information.</li>
   <li> <i>Quantity</i> specifies number of instances of the range expression to be generated. </li>
   <li> <i>Unique</i> checkbox skips values which were already encountered. Values are generated in order, so this may alter distribution of your values - i.e.,
@@ -29,12 +29,12 @@ Continue at your own risk!
 
 <ul>
   <li> <i>elements</i> E.g., \"<b>1</b>\" or \"<b>dog</b>\". Numbers (signed, unsigned, decimal) or simple strings.</li>
-  <li> <i>lists</i> E.g., \"<b>1,2,3,dog,5-10</b>\". Coma or space delimited lists of expressions.</li>
+  <li> <i>lists</i> E.g., \"<b>1,2,3,dog,5-10</b>\". Comma or space delimited lists of expressions.</li>
   <li> <i>ranges</i> E.g., \"<b>1-5</b>\". Ranges are generally of form \"numeric expression - numeric expression\". Ranges are treated as if expanded into the parent list.</li>
   <li> <i>parenthesis groups</i> E.g., \"<b>(1,2,3)</b>\". parenthesis group picks one element with uniform probability and hands it over to the parent. </li>
-  <li> <i>concatenation</i> E.g., \"<b>((a,b,c)|(1,2,3))</b>\" same as \"<b>(a,b,c|1,2,3)</b>\". Concatenates results of right and left side as a string. Result may be \"a|2\". This has <i>lower</i> priority than coma! </li>
+  <li> <i>concatenation</i> E.g., \"<b>((a,b,c)|(1,2,3))</b>\" same as \"<b>(a,b,c|1,2,3)</b>\". Pipe concatenates results of right and left side as a string (delimiting them by pipe). Result may be \"a|2\". This has <i>lower</i> priority than comma! </li>
   <li> <i>string concatenation</i> E.g., \"<b>(cat,dog " eats " mouse, fish)</b>\" Any quote-enclosed string can be used in place of the "<b>|</b>" operator. </li>
-  <li> <i>weight operator</i> E.g., \"1,2,3[2]\" Explicitly sets weight of the element. In this case, 3's probability will be 50%. Implicit weight is 1. </li>
+  <li> <i>weight operator</i> E.g., \"<b>1,2,3[2]</b>\" Explicitly sets weight of the element. In this case, 3s probability is 50%. Implicit weight is 1. </li>
 </ul>
 
         <h2>Advanced use (distribution rules):</h2>
@@ -48,12 +48,12 @@ Continue at your own risk!
 
   <h2>Advanced use (examples):</h2>
   <li> \"<b>((yellow,red)|bird),((small,big)|dog)</b>\" May return for instance \"yellow|bird\" or \"small|dog\". May not return \"red|dog\"</li>
-  <li> \"<b>(yellow,red)|bird,(small,big)|dog</b>\" Incorrectly parenthesed. One of possible results is \"yellow|bird|dog\"</li>
-  <li> \"<b>(1,3)-(6-9)</b>\" Possible, but not recommended.</li>
+  <li> \"<b>(yellow,red)|bird,(small,big)|dog</b>\" Is incorrectly parenthesised. One of possible results is \"yellow|bird|dog\"</li>
+  <li> \"<b>(1,3)-(6-9)</b>\" Not recommended, but possible</li>
   <li> \"<b>1,(2,3)</b>\" Returns 1 with 50% chance.</li>
   <li> \"<b>1,2-3</b>\" Returns 1 with 33% chance.</li>
-  <li> \"<b>(1.0-2.0)[3]</b>\" Returns decimal number with weight set to 3.</li>
   <li> \"<b>1,2.0-3.0</b>\" Returns 1 with 50% or decimal number between 2 and 3.</li>
+  <li> \"<b>(1.0-2.0)[3],5</b>\" Returns decimal number between 1 and 2 with 75% chance, or 5.</li>
   <li> \"<b>(cat,dog[0] " eats " mouse, fish[3])</b>\" Returns "cat eats fish" with 75% or "cat eats mouse" with 25%.</li>
   <li> \"<b>(1-3),(4-20),(21-25)</b>" First picks one group (with uniform probability) and then picks number from that group (with probability uniform within that group).</li>
 ]]>
