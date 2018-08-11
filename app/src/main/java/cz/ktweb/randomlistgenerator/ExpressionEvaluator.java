@@ -227,7 +227,9 @@ public class ExpressionEvaluator {
                 buffer.add(evaluateSingleItem());
             }
         }
-        results.add(pick(buffer));
+        if(!buffer.isEmpty()) {
+            results.add(pick(buffer));
+        }
         return squash(results);
     }
 }
