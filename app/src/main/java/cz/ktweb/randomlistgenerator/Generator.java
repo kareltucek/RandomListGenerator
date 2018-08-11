@@ -146,38 +146,24 @@ public class Generator {
                 newSlices[5] = "";
                 startIdx = 7;
             }
-            newSlices[6] = viewNumString(deserializeString(newSlices[5]), slices, startIdx, slices.length);
+            newSlices[6] = viewNumString(Utils.deserializeString(newSlices[5]), slices, startIdx, slices.length);
             return newSlices;
         }
         return slices;
     }
 
-    public static String serializeString(String str)
-    {
-        return "\"" + str.replace("_", "__"). replace(" ", "_") + "\"";
-    }
-
-    public static String deserializeString(String str)
-    {
-        return str
-                .replaceAll("__", "\n")
-                .replaceAll("_", " ")
-                .replaceAll("\n", "_")
-                .replaceAll("^\"", "")
-                .replaceAll("\"$", "");
-    }
 
     public static Generator fromString(String str)
     {
         try {
             String[] slices = str.split(" ");
             slices = resolveNumericGenerator(slices);
-            String expr = deserializeString(slices[1]);
+            String expr = Utils.deserializeString(slices[1]);
             int q = Integer.parseInt(slices[2]);
             int sort = Integer.parseInt(slices[3]);
             int unique = Integer.parseInt(slices[4]);
-            String label = deserializeString(slices[5]);
-            String values = deserializeString(slices[6]);
+            String label = Utils.deserializeString(slices[5]);
+            String values = Utils.deserializeString(slices[6]);
             return new Generator(expr, q, sort > 0, unique > 0, label, values);
         }
         catch(Exception e)
@@ -188,7 +174,7 @@ public class Generator {
 
     public String toString()
     {
-        String serial = "E " + serializeString(this.expr) + " " + q + " " + (sort ? 1 : 0 ) + " " + (unique ? 1 : 0) + " " + serializeString(this.label) + " " + serializeString(this.value);
+        String serial = "E " + Utils.serializeString(this.expr) + " " + q + " " + (sort ? 1 : 0 ) + " " + (unique ? 1 : 0) + " " + Utils.serializeString(this.label) + " " + Utils.serializeString(this.value);
         return serial;
     }
 
