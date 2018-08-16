@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.util.Log;
 
@@ -92,7 +93,7 @@ public class MainWindow extends AppCompatActivity {
         LinearLayout ll = (LinearLayout) findViewById(R.id.generatorLayoutBox);
 
         View v = new GeneratorComponent(view.getContext(), null, generatorFromValues(view));
-        ll.addView(v);
+        ll.addView(v, 0);
     }
 
     public void showHelp(View view)
@@ -110,6 +111,9 @@ public class MainWindow extends AppCompatActivity {
         addGenerator(view);
         InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+        //ScrollView sc = view.getRootView().findViewById(R.id.scrollBox);
+        //sc.fullScroll(View.FOCUS_DOWN);
     }
 
     public void generateAll(View view) {
