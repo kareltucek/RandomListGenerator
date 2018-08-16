@@ -174,6 +174,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scrollBox"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
@@ -232,7 +233,6 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_weight="1"
-        android:focusableInTouchMode="true"
         android:onClick="generateAll"
         android:text="Generate All"
         app:layout_constraintBottom_toBottomOf="parent"
