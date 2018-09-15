@@ -26,6 +26,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
+        android:onClick="SelectGenerator"
         android:textAppearance="@android:style/TextAppearance.Medium"
         app:layout_constraintEnd_toStartOf="@+id/downButton"
         app:layout_constraintStart_toEndOf="@+id/generateButton"

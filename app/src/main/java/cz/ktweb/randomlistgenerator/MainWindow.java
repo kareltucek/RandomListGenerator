@@ -84,6 +84,16 @@ public class MainWindow extends AppCompatActivity {
         return tv.getText().toString();
     }
 
+    public void stringToTV(View view, int id, String text) {
+        TextView tv = view.getRootView().findViewById(id);
+        tv.setText(text);
+    }
+
+    public void checkedToTV(View view, int id, boolean check) {
+        CheckBox tv = view.getRootView().findViewById(id);
+        tv.setChecked(check);
+    }
+
     public Generator generatorFromValues(View view) {
         return new Generator(
                 Utils.normalizeExpression(stringFromTV(view, R.id.textViewExpr)),
@@ -153,6 +163,16 @@ public class MainWindow extends AppCompatActivity {
         idx = idx + 1 == ll.getChildCount() ? idx : idx + 1;
         ll.removeView(v);
         ll.addView(v, idx);
+    }
+
+    public void SelectGenerator(View view)
+    {
+        Generator g = ((GeneratorComponent)(view.getTag())).getGenerator();
+        stringToTV(view, R.id.textViewLab, g.getLabel());
+        stringToTV(view, R.id.textViewExpr, g.getExpr());
+        stringToTV(view, R.id.textViewQ, Integer.toString(g.getQ()));
+        checkedToTV(view, R.id.checkBoxUnique, g.getUnique());
+        checkedToTV(view, R.id.checkBoxSort, g.getSort());
     }
 
     public void Save()

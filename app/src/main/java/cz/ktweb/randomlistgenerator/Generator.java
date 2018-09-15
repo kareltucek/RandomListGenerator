@@ -188,4 +188,10 @@ public class Generator {
     {
         return value;
     }
+
+    public String getExpr() { return expr;};
+    public String getLabel() { return label;};
+    public int getQ() { return q;};
+    public boolean getUnique() { return unique;};
+    public boolean getSort() {return sort;};
 }
