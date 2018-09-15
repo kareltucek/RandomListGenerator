@@ -23,11 +23,13 @@ public class ExpressionEvaluator {
         Type type;
         String value;
         double weight;
+        int prec;
 
-        public Result(Type t, String v, double w){
+        public Result(Type t, String v, double w, int p){
             type = t;
             value = v;
             weight = w;
+            prec = p;
         }
     }
 
@@ -90,10 +92,11 @@ public class ExpressionEvaluator {
             {
                 Result r = list.get(i);
                 r.weight = total_weight;
+                r.type = t;
                 return r;
             }
         }
-        return new Result(Type.Error, "Error: Our roulette has broken. This should have never happened.", 1);
+        return new Result(Type.Error, "Error: Our roulette has broken. This should have never happened.", 1, 0);
     }
 
     private Result evaluateToken() {
@@ -104,16 +107,17 @@ public class ExpressionEvaluator {
             if(tok.contains("."))
             {
                 double r = Double.parseDouble(tok);
-                return new Result(Type.Double, tok, 1);
+                int prec = tok.length() - tok.lastIndexOf(".") - 1;
+                return new Result(Type.Double, tok, 1, prec);
             }
             else {
                 int i = Integer.parseInt(tok);
-                return new Result(Type.Int, tok, 1);
+                return new Result(Type.Int, tok, 1, 0);
             }
         }
         catch(Exception e)
         {
-            return new Result(Type.String, tok, 1);
+            return new Result(Type.String, tok, 1, 0);
         }
     }
 
@@ -124,7 +128,7 @@ public class ExpressionEvaluator {
             int r = Integer.parseInt(right.value);
             int min = l < r ? l : r;
             int max = l > r ? l : r;
-            return new Result(Type.Int, Integer.toString(rand.nextInt((max - min) + 1) + min), max-min + 1);
+            return new Result(Type.Int, Integer.toString(rand.nextInt((max - min) + 1) + min), max-min + 1, 0);
         }
         if((left.type == Type.Int || left.type == Type.Double) && (right.type == Type.Int || right.type == Type.Double))
         {
@@ -132,10 +136,12 @@ public class ExpressionEvaluator {
             double r = Double.parseDouble(right.value);
             double min = l < r ? l : r;
             double max = l > r ? l : r;
-            return new Result(Type.Double, Double.toString(min + rand.nextDouble()*(max - min)), 1);
+            double res = min + rand.nextDouble()*(max - min);
+            int prec = Math.max(left.prec, right.prec);
+            return new Result(Type.Double, Utils.formatDouble(res, prec), 1, prec);
 
         }
-        return new Result(Type.Error, "Error: Non-numeric value found as parameter to range.", 1);
+        return new Result(Type.Error, "Error: Non-numeric value found as parameter to range.", 1, 0);
     }
 
     private Result evaluateSingleItem() {
@@ -147,7 +153,7 @@ public class ExpressionEvaluator {
             item.weight = 1;
             if(!tokens[idx].equals(")"))
             {
-                return new Result(Type.Error, "Error: Closing parenthesis not found when expected.", 1);
+                return new Result(Type.Error, "Error: Closing parenthesis not found when expected.", 1, 0);
             }
             idx++;
         }
@@ -161,7 +167,7 @@ public class ExpressionEvaluator {
             idx++;
             if(idx >= tokens.length)
             {
-                return new Result(Type.Error, "Error: Out of range while complementing range syntax.", 1);
+                return new Result(Type.Error, "Error: Out of range while complementing range syntax.", 1, 0);
             }
             Result right = evaluateSingleItem();
             item = evaluatePair(item, right);
@@ -182,7 +188,7 @@ public class ExpressionEvaluator {
             s = s + list.get(i).value;
             error |= list.get(i).type == Type.Error;
         }
-        return new Result(error ? Type.Error : Type.String, s, 1);
+        return new Result(error ? Type.Error : Type.String, s, 1, 0);
     }
 
     private Result evaluateGroup()
@@ -194,14 +200,14 @@ public class ExpressionEvaluator {
             if(tokens[idx].equals("|"))
             {
                 results.add(pick(buffer));
-                results.add(new Result(Type.String, "|", 1));
+                results.add(new Result(Type.String, "|", 1, 0));
                 buffer = new Vector<>();
                 idx++;
             }
             else if(tokens[idx].startsWith("\""))
             {
                 results.add(pick(buffer));
-                results.add(new Result(Type.String, Utils.deserializeString(tokens[idx]), 1));
+                results.add(new Result(Type.String, Utils.deserializeString(tokens[idx]), 1, 0));
                 buffer = new Vector<>();
                 idx++;
             }
@@ -218,7 +224,7 @@ public class ExpressionEvaluator {
                 }
                 catch (Exception e)
                 {
-                    buffer.add(new Result(Type.Error, "Error: failed to process [] expression.", 1));
+                    buffer.add(new Result(Type.Error, "Error: failed to process [] expression.", 1, 0));
                 }
                 idx++;
             }

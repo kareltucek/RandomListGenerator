@@ -1,9 +1,20 @@
 package cz.ktweb.randomlistgenerator;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Utils {
     public static String serializeString(String str)
     {
         return "\"" + str.replace("_", "__"). replace(" ", "_") + "\"";
+    }
+
+    public static String formatDouble(double d, int precision)
+    {
+        return BigDecimal
+                .valueOf(d)
+                .setScale(precision, RoundingMode.HALF_UP)
+                .toString();
     }
 
     public static String deserializeString(String str)

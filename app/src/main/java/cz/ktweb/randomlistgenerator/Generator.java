@@ -4,8 +4,11 @@ import android.util.Log;
 
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Random;
 import cz.ktweb.randomlistgenerator.ExpressionEvaluator.*;
+
+
 
 public class Generator {
     private String expr;
@@ -56,31 +59,9 @@ public class Generator {
 
     public void SortStrings(String[] strings, ExpressionEvaluator.Type t)
     {
-        if(t == Type.Int)
+        if(t == Type.Int || t == Type.Double)
         {
-            int[] ints = new int[strings.length];
-            for(int i = 0; i < strings.length; i++)
-            {
-                ints[i] = Integer.parseInt(strings[i]);
-            }
-            Arrays.sort(ints);
-            for(int i = 0; i < strings.length; i++)
-            {
-                strings[i] = Integer.toString(ints[i]);
-            }
-        }
-        if(t == Type.Double)
-        {
-            double[] doubles = new double[strings.length];
-            for(int i = 0; i < strings.length; i++)
-            {
-                doubles[i] = Double.parseDouble(strings[i]);
-            }
-            Arrays.sort(doubles);
-            for(int i = 0; i < strings.length; i++)
-            {
-                strings[i] = Double.toString(doubles[i]);
-            }
+            Arrays.sort(strings, new NumericComparator());
         }
         if(t == Type.String)
         {
@@ -94,12 +75,13 @@ public class Generator {
         for(int i = 0; i < q; i++)
         {
             results[i] = "";
-            for(int j = 0; j < 1000; j++)
+            boolean success = false;
+            for(int j = 0; j < 100; j++)
             {
                 boolean isUnique = true;
                 Result r = ExpressionEvaluator.evaluate(expr);
                 String newVal = r.value;
-                t = r.type;
+                t = t == t.Error ? t.Error : r.type;
                 if(this.unique)
                 {
                     for(int k = 0; k < i; k++)
@@ -114,11 +96,17 @@ public class Generator {
                 if(isUnique)
                 {
                     results[i] = newVal;
+                    success = true;
                     break;
                 }
             }
+            if(!success)
+            {
+                t = Type.Error;
+                results[i] = "Failed generating unique value.";
+            }
         }
-        if(this.sort)
+        if(this.sort && q > 0)
         {
             SortStrings(results, t);
         }

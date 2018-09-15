@@ -65,8 +65,13 @@ public class MainWindow extends AppCompatActivity {
 
     public int intFromTV(View view, int id) {
         TextView tv = view.getRootView().findViewById(id);
-        String text = tv.getText().toString();
-        return Integer.parseInt(text);
+        try {
+            String text = tv.getText().toString();
+            return Integer.parseInt(text);
+        }
+        catch (Exception e){
+            return 1;
+        }
     }
 
     public boolean boolFromTV(View view, int id) {

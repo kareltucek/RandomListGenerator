@@ -19,6 +19,11 @@
     \"<b>red,blue</b>\") or
     even their combination. Range expression can also parse more complex expressions, which are however not intended for regular users.
 
+<h1>Bug report</h1>
+If you encounter any bug (crashes, etc.), please let me know either via github (github.com/kareltucek/RandomListGenerator) or via email (tucek.karel gmail (fill in the obvious missing characters)).
+
+Also, leaving some sort of feedback (rating with comment) is appreciated.
+
 <h1>Advanced guide</h1>
 Continue at your own risk!
 
@@ -28,7 +33,7 @@ Continue at your own risk!
         Range is specified as an expression written in a custom formal language. More complicated expressions can be composed of following constructs:
 
 <ul>
-  <li> <i>elements</i> E.g., \"<b>1</b>\" or \"<b>dog</b>\". Numbers (signed, unsigned, decimal) or simple strings.</li>
+  <li> <i>elements</i> E.g., \"<b>1</b>\" or \"<b>dog</b>\". Numbers (signed, unsigned, decimal) or simple strings. Decimal precision is given by the number of specified zeros.</li>
   <li> <i>lists</i> E.g., \"<b>1,2,3,dog,5-10</b>\". Comma or space delimited lists of expressions.</li>
   <li> <i>ranges</i> E.g., \"<b>1-5</b>\". Ranges are generally of form \"numeric expression - numeric expression\". Ranges are treated as if expanded into the parent list.</li>
   <li> <i>parenthesis groups</i> E.g., \"<b>(1,2,3)</b>\". parenthesis group picks one element with uniform probability and hands it over to the parent. </li>
@@ -53,6 +58,8 @@ Continue at your own risk!
   <li> \"<b>1,(2,3)</b>\" Returns 1 with 50% chance.</li>
   <li> \"<b>1,2-3</b>\" Returns 1 with 33% chance.</li>
   <li> \"<b>1,2.0-3.0</b>\" Returns 1 with 50% or decimal number between 2 and 3.</li>
+  <li> \"<b>2.0-3.0</b>\" May return 2.2.</li>
+  <li> \"<b>2.000-3.000</b>\" May return 2.264.</li>
   <li> \"<b>(1.0-2.0)[3],5</b>\" Returns decimal number between 1 and 2 with 75% chance, or 5.</li>
   <li> \"<b>(cat,dog[0] \" eats \" mouse, fish[3])</b>\" Returns \"cat eats fish\" with 75% or \"cat eats mouse\" with 25%.</li>
   <li> \"<b>(1-3),(4-20),(21-25)</b>" First picks one group (with uniform probability) and then picks number from that group (with probability uniform within that group).</li>
