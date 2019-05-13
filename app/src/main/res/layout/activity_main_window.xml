@@ -68,38 +68,17 @@
                     android:layout_weight="1"
                     android:text="Range" />
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/textViewExpr"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/textViewExpr"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:hint="Expression"
-                        android:imeOptions="actionDone"
-                        android:inputType="textPersonName"
-                        android:singleLine="true"
-                        android:text="1-6" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginRight="0dp"
-                        android:layout_marginTop="0dp"
-                        android:layout_weight="1"
-                        android:onClick="showHelp"
-                        android:visibility="gone"
-                        app:srcCompat="@android:drawable/ic_menu_help" />
-
-                </LinearLayout>
+                    android:ems="10"
+                    android:hint="Expression"
+                    android:imeOptions="actionDone"
+                    android:inputType="textMultiLine|textFilter"
+                    android:singleLine="false"
+                    android:text="1-6" />
 
             </LinearLayout>
 
@@ -217,6 +196,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_weight="1"
+                android:fadeScrollbars="false"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="168dp" />
 
