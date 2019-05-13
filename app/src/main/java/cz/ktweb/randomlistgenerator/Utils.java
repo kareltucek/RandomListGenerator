@@ -6,7 +6,8 @@ import java.math.RoundingMode;
 public class Utils {
     public static String serializeString(String str)
     {
-        return "\"" + str.replace("_", "__"). replace(" ", "_") + "\"";
+        String res = "\"" + str.replaceAll("  *", " ").replace("_", "__").replace(" ", "_") + "\"";
+        return res;
     }
 
     public static String formatDouble(double d, int precision)
@@ -15,6 +16,14 @@ public class Utils {
                 .valueOf(d)
                 .setScale(precision, RoundingMode.HALF_UP)
                 .toString();
+    }
+
+    public static String deserializeUnderscores(String str)
+    {
+        return str
+                .replaceAll("__", "\n")
+                .replaceAll("_", " ")
+                .replaceAll("\n", "_");
     }
 
     public static String deserializeString(String str)

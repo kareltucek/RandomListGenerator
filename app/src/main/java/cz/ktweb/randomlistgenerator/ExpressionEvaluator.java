@@ -83,20 +83,22 @@ public class ExpressionEvaluator {
             }
             total_weight += r.weight;
         }
-        int roulette = rand.nextInt(total_weight);
-        int sum = 0;
-        for(int i = 0; i < list.size(); i++)
-        {
-            sum += list.get(i).weight;
-            if(sum > roulette)
-            {
-                Result r = list.get(i);
-                r.weight = total_weight;
-                r.type = t;
-                return r;
+        if(total_weight > 0) {
+            int roulette = rand.nextInt(total_weight);
+            int sum = 0;
+            for (int i = 0; i < list.size(); i++) {
+                sum += list.get(i).weight;
+                if (sum > roulette) {
+                    Result r = list.get(i);
+                    r.weight = total_weight;
+                    r.type = t;
+                    return r;
+                }
             }
+            return new Result(Type.Error, "Oops! Roulette has broken. Should have never hapenned!", 1, 0);
+        } else {
+            return new Result(Type.String, "", 1, 0);
         }
-        return new Result(Type.Error, "Error: Our roulette has broken. This should have never happened.", 1, 0);
     }
 
     private Result evaluateToken() {

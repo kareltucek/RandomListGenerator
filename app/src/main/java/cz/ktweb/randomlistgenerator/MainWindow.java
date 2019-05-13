@@ -126,6 +126,7 @@ public class MainWindow extends AppCompatActivity {
         addGenerator(view);
         InputMethodManager inputMethodManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        Save();
 
         //ScrollView sc = view.getRootView().findViewById(R.id.scrollBox);
         //sc.fullScroll(View.FOCUS_DOWN);
@@ -168,8 +169,8 @@ public class MainWindow extends AppCompatActivity {
     public void SelectGenerator(View view)
     {
         Generator g = ((GeneratorComponent)(view.getTag())).getGenerator();
-        stringToTV(view, R.id.textViewLab, g.getLabel());
-        stringToTV(view, R.id.textViewExpr, g.getExpr());
+        stringToTV(view, R.id.textViewLab, Utils.deserializeUnderscores(g.getLabel()));
+        stringToTV(view, R.id.textViewExpr, Utils.deserializeUnderscores(g.getExpr()));
         stringToTV(view, R.id.textViewQ, Integer.toString(g.getQ()));
         checkedToTV(view, R.id.checkBoxUnique, g.getUnique());
         checkedToTV(view, R.id.checkBoxSort, g.getSort());
